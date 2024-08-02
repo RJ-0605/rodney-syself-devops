@@ -6,7 +6,6 @@ metadata:
   labels:
     app: {{ .Values.app.name }}
 
-
 spec:
   replicas: {{ .Values.app.spec.replicas }}
   selector:
@@ -22,25 +21,3 @@ spec:
         image: {{ .Values.app.imageBlue }}
         ports:
         - containerPort: 3000
-        env:
-        - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: sql-secret
-              key: sql-username
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: sql-secret
-              key: sql-password
-        - name: DB_NAME
-          valueFrom:
-            secretKeyRef:
-              name: sql-secret
-              key: sql-database
-        - name: DB_HOST
-          value: "sql3.freemysqlhosting.net"
-        - name: DB_PORT
-          value: "3306"
-
----
