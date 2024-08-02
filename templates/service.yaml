@@ -2,19 +2,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: bg-app-service
-  namespace: default
-spec:
+  name: {{ .Values.app.name }}-service
+  namespace: default 
+spec: 
   type: ClusterIP
   selector:
-    app: myapp
+    app: {{ .Values.app.name }}
   ports:
     - protocol: TCP
       port: 80
       targetPort: 3000
-
-
-
-
-
 

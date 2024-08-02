@@ -1,0 +1,41 @@
+# Default values for bg-app-helm-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+nginx-ingress-controller:
+  fullnameOverride: nginx-ingress-controller
+
+nginxIngressController:
+  enabled: true
+
+cert-manager: 
+  enabled: true 
+  installCRDs: true
+  fullnameOverride: cert-manager
+
+app: 
+  name: bg-app
+  spec: 
+    replicas: 3
+  imageBlue:  "us-central1-docker.pkg.dev/dev-prod-space/bg-slim-app-blue/bg-slim-app-blue:1.9"
+  imageGreen: "us-central1-docker.pkg.dev/dev-prod-space/bg-slim-app-green/bg-slim-app-green:1.9"
+
+
+sqlSecretFile: 
+  name: sql-secret
+  data:
+    sqlUsername: c3FsMzY5OTg4MQ==
+    sqlPassword: YnFjTVk5WXZyaQ==
+    sqlDatabase: c3FsMzY5OTg4MQ==
+
+
+certIssuerFile:
+  spec:
+    email: jedidiahkwao@gmail.com
+
+ingressFile:
+  name: bg-app-ingress
+  host: bg-app.ddns.net
+
+

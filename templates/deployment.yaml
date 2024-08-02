@@ -1,23 +1,46 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bg-app-deployment
-  namespace: prod 
+  name: {{ .Values.app.name }}-deployment
+  namespace: default 
   labels:
-    app: myapp
+    app: {{ .Values.app.name }}
+
 
 spec:
-  replicas: 3
+  replicas: {{ .Values.app.spec.replicas }}
   selector:
     matchLabels:
-      app: myapp
+      app: {{ .Values.app.name }}
   template:
     metadata:
       labels:
-        app: myapp
+        app: {{ .Values.app.name }}
     spec:
       containers:
-      - name: myapp
-        image: "myapp:blue"
+      - name: {{ .Values.app.name }}
+        image: {{ .Values.app.imageBlue }}
         ports:
         - containerPort: 3000
+        env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: sql-secret
+              key: sql-username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sql-secret
+              key: sql-password
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: sql-secret
+              key: sql-database
+        - name: DB_HOST
+          value: "sql3.freemysqlhosting.net"
+        - name: DB_PORT
+          value: "3306"
+
+---
