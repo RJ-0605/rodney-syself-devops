@@ -21,3 +21,26 @@ spec:
         image: {{ .Values.app.imageBlue }}
         ports:
         - containerPort: 3000
+        # if external  Database connection is needed
+        {{- if .Values.database.enabled }}
+        env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: sql-secret
+              key: sql-username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sql-secret
+              key: sql-password
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: sql-secret
+              key: sql-database
+        - name: DB_HOST
+          value: {{ .Values.database.host }}
+        - name: DB_PORT
+          value: {{ .Values.database.port }}
+        {{- end }}

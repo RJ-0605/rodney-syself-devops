@@ -21,7 +21,9 @@ app:
   imageBlue:  "us-central1-docker.pkg.dev/dev-prod-space/bg-slim-app-blue/bg-slim-app-blue:1.9"
   imageGreen: "us-central1-docker.pkg.dev/dev-prod-space/bg-slim-app-green/bg-slim-app-green:1.9"
 
-
+database:
+  enabled: true
+  
 sqlSecretFile: 
   name: sql-secret
   data:
