@@ -1,0 +1,15 @@
+
+
+kubectl apply -f db-deployment.yaml
+
+
+You can watch the startup progress by running:
+
+kubectl get pods -l app=mysql --watch
+
+
+NAME      READY     STATUS    RESTARTS   AGE
+mysql-0   2/2       Running   0          2m
+mysql-1   2/2       Running   0          1m
+mysql-2   2/2       Running   0          1m
+

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: default
+data:
+  primary.cnf: |
+    # Primary configuration for MySQL
+  replica.cnf: |
+    # Replica configuration for MySQL
+  server-id.cnf: |
+    [mysqld]
+    server-id={{ .Values.serverId }}
+  init-script.sh: |
+    {{ .Values.initScript.initCommand }}
+  clone-script.sh: |
+    {{ .Values.cloneScript.cloneCommand }}
+  xtrabackup-script.sh: |
+    {{ .Values.xtrabackupScript.backupCommand }}

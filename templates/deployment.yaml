@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.app.name }}-deployment
-  namespace: default 
+  namespace: {{ .Values.app.namespace }} 
   labels:
     app: {{ .Values.app.name }}
 
@@ -21,7 +21,7 @@ spec:
         image: {{ .Values.app.imageBlue }}
         ports:
         - containerPort: 3000
-        # if external  Database connection is needed
+        # if external Database connection is needed
         {{- if .Values.database.enabled }}
         env:
         - name: DB_USER
@@ -40,7 +40,44 @@ spec:
               name: sql-secret
               key: sql-database
         - name: DB_HOST
-          value: {{ .Values.database.host }}
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Values.app.name }}-config
+              key: DB_HOST
         - name: DB_PORT
-          value: {{ .Values.database.port }}
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Values.app.name }}-config
+              key: DB_PORT
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Values.app.name }}-config
+              key: LOG_LEVEL
+        - name: PERSISTENCE
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Values.app.name }}-config
+              key: PERSISTENCE
         {{- end }}
+        resources:
+          requests:
+            cpu: 250m
+            memory: 512Mi
+          limits:
+            cpu: 500m
+            memory: 1Gi
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /readiness
+            port: 3000
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          timeoutSeconds: 3

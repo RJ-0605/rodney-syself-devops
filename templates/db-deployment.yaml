@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.app.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+      app.kubernetes.io/name: {{ .Values.app.name }}
+  serviceName: {{ .Values.app.name }}
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+        app.kubernetes.io/name: {{ .Values.app.name }}
+    spec:
+      initContainers:
+      - name: init-mysql
+        image: {{ .Values.app.image }}
+        command:
+        - bash
+        - "-c"
+        - |
+          {{ .Values.configMap.initScript }}
+        volumeMounts:
+        - name: conf
+          mountPath: /mnt/conf.d
+        - name: config-map
+          mountPath: /mnt/config-map
+      - name: clone-mysql
+        image: {{ .Values.xtrabackup.image }}
+        command:
+        - bash
+        - "-c"
+        - |
+          {{ .Values.configMap.cloneScript }}
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+          subPath: mysql
+        - name: conf
+          mountPath: /etc/mysql/conf.d
+      containers:
+      - name: mysql
+        image: {{ .Values.app.image }}
+        env:
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: {{ .Values.mysql.mysqlAllowEmptyPassword }}
+        ports:
+        - name: mysql
+          containerPort: 3306
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+          subPath: mysql
+        - name: conf
+          mountPath: /etc/mysql/conf.d
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+        livenessProbe:
+          exec:
+            command: ["mysqladmin", "ping"]
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+        readinessProbe:
+          exec:
+            command: ["mysql", "-h", "127.0.0.1", "-e", "SELECT 1"]
+          initialDelaySeconds: 5
+          periodSeconds: 2
+          timeoutSeconds: 1
+      - name: xtrabackup
+        image: {{ .Values.xtrabackup.image }}
+        ports:
+        - name: xtrabackup
+          containerPort: 3307
+        command:
+        - bash
+        - "-c"
+        - |
+          {{ .Values.configMap.xtrabackupScript }}
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+          subPath: mysql
+        - name: conf
+          mountPath: /etc/mysql/conf.d
+      volumes:
+      - name: conf
+        emptyDir: {}
+      - name: config-map
+        configMap:
+          name: {{ .Values.configMap.name }}
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 10Gi
