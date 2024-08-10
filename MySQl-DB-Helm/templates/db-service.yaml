@@ -1,0 +1,32 @@
+# Headless service for stable DNS entries of StatefulSet members.
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.mysql.services.headless.name }}
+  labels:
+    app: {{ .Values.mysql.appName }}
+    app.kubernetes.io/name: {{ .Values.mysql.appName }}
+spec:
+  ports:
+  - name: mysql
+    port: {{ .Values.mysql.ports }}
+  clusterIP: None
+  selector:
+    app: {{ .Values.mysql.appName }}
+---
+# Client service for connecting to any MySQL instance for reads.
+# For writes, you must instead connect to the primary: mysql-0.mysql.
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.mysql.services.read.name }}
+  labels:
+    app: {{ .Values.mysql.appName }}
+    app.kubernetes.io/name: {{ .Values.mysql.appName }}
+    readonly: {{ .Values.mysql.services.read.readonlyLabel | quote }}
+spec:
+  ports:
+  - name: mysql
+    port: {{ .Values.mysql.ports }}
+  selector:
+    app: {{ .Values.mysql.appName }}
