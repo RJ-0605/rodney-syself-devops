@@ -4,6 +4,8 @@ This is the architecture i will implement for a production Kubernetes Environmen
 
 ### **Elements of Kubernetes Architecture Design**
 
+
+
 #### **1. Infrastructure Layer**
 
 * **Virtual Machines (VMs):**
@@ -27,8 +29,8 @@ This is the architecture i will implement for a production Kubernetes Environmen
 
 #### **4. Worker Nodes**
 
-* **Kubelet:** Deploy Kubelet on all worker nodes. It will be responsible for running and managing the containers, ensuring that the desired state defined by the control plane is maintained.
-* **Container Runtime:** Use a container runtime like containerd or CRI-O to manage the lifecycle of containers on the worker nodes. This layer will ensure that containers are launched, monitored, and terminated as needed.
+* **Kubelet:** Kubelet  is deployed on all worker nodes. It will be responsible for running and managing the containers, ensuring that the desired state defined by the control plane is maintained.
+* **Container Runtime:** A container runtime like containerd or CRI-O is used  to manage the lifecycle of containers on the worker nodes. This layer will ensure that containers are launched, monitored, and terminated as needed.
 * **Kube-Proxy:** Deploy Kube-Proxy on each worker node to manage network rules and enable communication between services. It ensures seamless networking and load balancing within the cluster.
 
 #### **5. Networking Layer**
