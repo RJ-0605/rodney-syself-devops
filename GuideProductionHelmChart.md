@@ -7,7 +7,7 @@ This is the architecture i will implement for a production Kubernetes Environmen
 #### **1. Infrastructure Layer**
 
 * **Virtual Machines (VMs):**
-  * **Control Plane Nodes:** A minimum of three VMs to host the control plane components is deployed. This ensures high availability and fault tolerance. These nodes will manage the cluster's state, schedule workloads, and maintain consistency.
+  * **Control Plane Nodes:** A minimum of one VMs to host the control plane components is deployed. However, a minimum of 3 control nodes, ensures high availability and fault tolerance. These nodes will manage the cluster's state, schedule workloads, and maintain consistency.
   * **Worker Nodes:** Multiple VMs to serve as worker nodes. These nodes will run the containerized applications and handle workloads. The number of worker nodes will depend on the expected load and scalability requirements.
 * **Private Network:**
   * **Network Segmentation:** Use a private network to isolate the Kubernetes environment from external traffic, enhancing security. Subnets will be created to separate the control plane and worker nodes, allowing for controlled communication.
@@ -41,6 +41,9 @@ This is the architecture i will implement for a production Kubernetes Environmen
 
 * **Container Storage Interface (CSI):**
   * **Storage Provisioning:** Implement a CSI-compatible storage solution to manage persistent storage for applications running in the Kubernetes cluster. The CSI will enable dynamic provisioning of storage volumes and ensure that data persists beyond the lifecycle of individual containers.
+    *This is how the CSI works as a volume Driver and attaches to the node*
+    ![1723405073950](image/GuideProductionHelmChart/1723405073950.png)
+    More CSi Diagrams
   * **Persistent Volumes (PVs):** Configure Persistent Volumes and Persistent Volume Claims (PVCs) to allocate storage for stateful applications. These volumes will be backed by the storage solution integrated with the CSI.
 
 #### **7. Security Layer**
