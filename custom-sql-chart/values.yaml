@@ -13,9 +13,10 @@ mysql:
     read:
       name: mysql-read
       readonlyLabel: "true"     
-  rootPassword: ""
-  mysqlAllowEmptyPassword: "1"
-
+  rootPassword: my-root-password
+  user: my-user
+  userPassword: my-user-password
+  mysqlAllowEmptyPassword: "false"
 
 xtrabackup:
   image: gcr.io/google-samples/xtrabackup:1.0

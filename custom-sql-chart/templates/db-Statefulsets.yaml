@@ -46,8 +46,18 @@ spec:
       - name: mysql
         image: {{ .Values.app.image }}
         env:
-        - name: MYSQL_ALLOW_EMPTY_PASSWORD
-          value: {{ .Values.mysql.mysqlAllowEmptyPassword }}
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-root-password
+        - name: MYSQL_USER
+          value: {{ .Values.mysql.user }}
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-user-password
         ports:
         - name: mysql
           containerPort: 3306
