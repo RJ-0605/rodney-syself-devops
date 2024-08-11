@@ -17,7 +17,7 @@ The objective  of this  guide is to,  will walk you through the creation of a He
 
 ## Directory Structure
 
-Demo CRM the Helm Chart follows a proper directory structure:
+Demo CRM the Helm Chart follows a proper directory structure, (files are found [here](demo-crm-app/)):
 
 ```bash
     demo-crm-app/

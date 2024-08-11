@@ -1,7 +1,21 @@
 Database Guide: Choosing MySQL with Helm Charts
+## Directory Structure
+
+Demo CRM the Helm Chart follows a proper directory structure, (files are found [here](custom-sql-chart/)):
+
+```bash
+    custom-sql-chart/
+    ├── charts/
+    ├── templates/
+    │   ├── db-configMap.yaml
+    │   ├── db-Statefulsets.yaml
+    │   └── db-service.yaml
+    ├── values.yaml
+    └── Chart.yaml
+```
 
 - * 1. Introduction
-       This guide outlines the rationale for choosing MySQL as the database for my  CRM application, i seek to detail the implementation plan using custom built MYSQL  Helm charts, and explains why i decided to customize my own Helm chart. However i have more details of helm Chart  in
+       This guide outlines the rationale for choosing MySQL as the database for my  CRM application, i seek to detail the implementation plan using custom built MYSQL  Helm charts, and explains why i decided to customize my own Helm chart. However i gave more insight in the details of helm Chart  in [file](DB_Details_Guide.md)
 - * 2. Why MySQL?
        MySQL is a well-established, open-source relational database management system (RDBMS) known for its reliability, scalability, and ease of use. Here’s why MySQL is an excellent choice for the CRM application:
        a. **Relational Data Structure**: The CRM application requires structured data storage with complex relationships between entities, making a relational database like MySQL ideal.

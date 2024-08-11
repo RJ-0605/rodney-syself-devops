@@ -1,5 +1,13 @@
 # rodney-syself-devops
 
+### **Firstly**
+
+the following were also provided in organized 
+
+i. The  custom built Helm Chart from ground-up code and guide for a [CRM Application](demo-crm-app/AppGuide.md)
+
+ii. The guide to and custom built [MySQL statefulsets](custom-sql-chart/Main_Guide.md) Helm Chart
+
 ### **Production Ready Architecture Design**
 
 ![1723406983630](image/GuideProductionHelmChart/1723406983630.png)
