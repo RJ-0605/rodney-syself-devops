@@ -1,8 +1,9 @@
-Details
+Database Choice and Implementation Details
+excerpts taken form the original kubernetes website Documentation see [link](https://kubernetes.io/docs/tasks/run-application/run-replicated-stateful-application/)
 
-This defines a StatefulSet for deploying a MySQL database cluster in Kubernetes. Here's a brief explanation of its key components:
+This defines a **StatefulSet** that i used for deploying a MySQL database cluster in Kubernetes. Here's a brief explanation of its key components:
 
-* **StatefulSet**: 
+* **StatefulSet**:
   This manages the deployment and scaling of a set of pods, with unique identities and stable, persistent storage. It is ideal for stateful applications like databases.
 * **Init Containers**:
   * init-mysql: Configures MySQL server instances with unique server IDs and initializes configuration files.
@@ -23,6 +24,8 @@ This defines a StatefulSet for deploying a MySQL database cluster in Kubernetes.
 * Probes:
   * Liveness Probe: Checks if the MySQL process is alive by pinging it.
   * Readiness Probe: Ensures MySQL is ready to accept connections by executing a simple SQL query.
+
+    ![1723389263700](image/ImplementationDetailsGuide/1723389263700.png)
 * Volumes:
   * conf: Temporary storage for MySQL configuration files.
   * config-map: Contains the MySQL configuration files (primary.cnf and replica.cnf).
