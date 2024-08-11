@@ -22,11 +22,11 @@ Database Guide: Choosing MySQL with Helm Charts
      * Services: Includes both a headless service for internal communication between MySQL pods and a client service for external access.
      * ConfigMap & Secrets: Manages configuration settings and sensitive data like passwords.
 
-7. Custom Helm Chart: I opted to create a custom Helm chart instead of relying entirely on existing charts for the following reasons:
+- 7. Custom Helm Chart: I opted to create a custom Helm chart instead of relying entirely on existing charts for the following reasons:
    * Customization: I needed specific configurations tailored to my application's needs, such as custom replication settings and security enhancements.
    * Control & Flexibility: Customizing the Helm chart allowed us to maintain full control over the deployment, ensuring it aligns with my production-readiness criteria.
    * Integration: My custom chart is designed to integrate seamlessly with other components of my application, which are managed in a unified Helm chart.
-8. Deployment Steps:
+- 8. Deployment Steps:
    * My Next point is to Configure my Kubernetes cluster and ensure persistent storage is available, and also configure a Storage Class for my pvc if its not already done for a **local-path provisioner** using **Rancher** ,I could also do for NFS or block storage if those options are available with the use of a **CSI Driver** 
    * I will Deploy the MySQL StatefulSet using the custom Helm chart.
    * Finally Monitor the deployment using Kubernetes tools and ensure the database is functioning correctly.
