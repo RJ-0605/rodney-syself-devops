@@ -122,7 +122,26 @@ Demo CRM the Helm Chart follows a proper directory structure:
                   config:
           ...
        ```
-- * 6. Create the ConfigMap Template templates/configmap.yaml see [file](templates/configmap.yaml)
-- * 7. Add the Secret Template [file](templates/secret.yaml)
-- * 8. Add the Horizontal Pod AutoScaler automatically updates a workload resource (such as a Deployment or StatefulSet), with the aim of automatically scaling the workload to match demand. [file](templates/hpa.yaml)
-- * 9. Finally add the cert-manager template  to enable TLS termination for the ingress [file](templates/cert-manager.yaml)
+- * 6. I createdthe ConfigMap Template templates/configmap.yaml see [file](templates/configmap.yaml)
+- * 7. I added the Secret Template [file](templates/secret.yaml)
+- * 8. Also i attached the Horizontal Pod AutoScaler automatically updates a workload resource (such as a Deployment or StatefulSet), with the aim of automatically scaling the workload to match demand. [file](templates/hpa.yaml)
+- * 9. Finally  i attached  the cert-manager template  to enable TLS termination for the ingress [file](templates/cert-manager.yaml)
+    10. I will Run the Helm Chart to deploy the app
+        ```
+        helm install demo-crm-app-release ./demo-crm-app \
+          --namespace prod \
+          --values ./values.yaml
+        ```
+  * Finally Monitor the deployment using Kubernetes tools and ensure the demo-crm-app is functioning correctly.
+    with helm
+
+    ```
+    helm status demo-crm-app-release --namespace prod
+
+    ```
+    and  with *kubectl*
+
+    ```
+    kubectl get pods --namespace prod -l app=<app-label>
+
+    ```

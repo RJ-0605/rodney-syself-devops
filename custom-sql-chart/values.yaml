@@ -2,10 +2,7 @@ app:
   name: mysql
   image: mysql:5.7
 
-database:
-  enabled: true
-  host: mysql-service.default.svc.cluster.local
-  port: "3306"
+
 
 mysql:
   appName: mysql

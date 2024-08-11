@@ -1,4 +1,4 @@
-Database Choice and Implementation Details
+Database Choice and Helm Chart Details
 excerpts taken form the original kubernetes website Documentation see [link](https://kubernetes.io/docs/tasks/run-application/run-replicated-stateful-application/)
 
 This defines a **StatefulSet** that i used for deploying a MySQL database cluster in Kubernetes. Here's a brief explanation of its key components:
