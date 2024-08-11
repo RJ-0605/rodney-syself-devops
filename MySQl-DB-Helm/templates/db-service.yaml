@@ -3,6 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.mysql.services.headless.name }}
+  namespace: prod
   labels:
     app: {{ .Values.mysql.appName }}
     app.kubernetes.io/name: {{ .Values.mysql.appName }}
@@ -20,6 +21,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.mysql.services.read.name }}
+  namespace: prod
   labels:
     app: {{ .Values.mysql.appName }}
     app.kubernetes.io/name: {{ .Values.mysql.appName }}

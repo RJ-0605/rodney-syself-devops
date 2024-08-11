@@ -1,21 +1,21 @@
-# Default values for bg-app-helm-chart.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
 
 app:
   name: demo-crm-app
   spec:
     replicas: 2
   imageBlue: "gcr.io/my-first-kuba/nextjs-docker:3.0"
-  namespace: default
+  namespace: prod
 
+
+hpa:
+  minReplicas: 2 
+  maxReplicas: 10 
+  targetCPUUtilizationPercentage: 80 
+  targetMemoryUtilizationPercentage: 80 
 
 config:
   logLevel: "info"
   persistence: "true"
-
-
 
 
 nginx-ingress-controller:
@@ -28,13 +28,6 @@ cert-manager:
   enabled: true 
   installCRDs: true
   fullnameOverride: cert-manager
-
-app: 
-  name: bg-app
-  spec: 
-    replicas: 3
-  imageBlue:  "us-central1-docker.pkg.dev/dev-prod-space/bg-slim-app-blue/bg-slim-app-blue:1.9"
-  imageGreen: "us-central1-docker.pkg.dev/dev-prod-space/bg-slim-app-green/bg-slim-app-green:1.9"
 
 
 
@@ -71,12 +64,7 @@ ingressFile:
 
 
 
-mongoSecretFile: 
-  name: mongo-secret
-  data:
-    mongoUsername: a3dhbw==
-    mongoPassword: a3dhb3Bhc3N3b3Jk
-    mongoDatabase: cm9kbmV5bW9uZ29EYXRhYmFzZQ==
+
 
 
 

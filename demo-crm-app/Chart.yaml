@@ -5,6 +5,17 @@ version: 0.1.0
 appVersion: "1.0"
 
 dependencies:
-  - name: demo-dbSQL
-    version: 1.0.2
-    repository: "https://github.com/RJ-0605/rodney-syself-devops.git"
+- name: demo-dbSQL
+  version: 1.0.2
+  repository: "https://github.com/RJ-0605/rodney-syself-devops.git"
+  condition: database.enabled
+
+- name: cert-manager
+  version: "1.10.x"
+  repository: "https://charts.jetstack.io"
+  condition: cert-manager.enabled
+
+- name: nginx-ingress-controller
+  version: "9.3.x"
+  repository: "https://charts.bitnami.com/bitnami"
+  condition: nginx-ingress-controller.enabled

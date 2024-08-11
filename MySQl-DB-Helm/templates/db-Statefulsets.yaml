@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ .Values.app.name }}
+  namespace: {{ .Values.app.namespace }}
 spec:
   selector:
     matchLabels:
