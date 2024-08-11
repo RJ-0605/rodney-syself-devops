@@ -1,10 +1,8 @@
-**Production Ready Kubernetes Guide** 
+**Production Ready Kubernetes Guide**
 
 This is the architecture i will implement for a production Kubernetes Environment.
 
 ### **Elements of Kubernetes Architecture Design**
-
-
 
 #### **1. Infrastructure Layer**
 
@@ -23,7 +21,7 @@ This is the architecture i will implement for a production Kubernetes Environmen
 
 * **Kubernetes Version:** v1.30.3
   * **API Server:** The API server will be deployed on all control plane nodes. It acts as the front-end for the Kubernetes control plane, handling all communication within the cluster.
-  * **Etcd:** Deploy Etcd as a distributed key-value store across all control plane nodes. It stores the cluster's state and configuration, ensuring high availability and data consistency.
+  * **Etcd:** Etcd acts as a distributed key-value store across all control plane nodes. It stores the cluster's state and configuration, ensuring high availability and data consistency.
   * **Controller Manager:** This component will be responsible for managing the cluster's lifecycle, including node management, replication, and endpoint discovery.
   * **Scheduler:** The scheduler will be deployed on the control plane nodes to assign workloads to the appropriate worker nodes based on resource availability and scheduling policies.
 
