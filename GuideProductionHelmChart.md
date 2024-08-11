@@ -4,6 +4,8 @@ This is the architecture i will implement for a production Kubernetes Environmen
 
 ### **Elements of Kubernetes Architecture Design**
 
+![1723406983630](image/GuideProductionHelmChart/1723406983630.png)
+
 #### **1. Infrastructure Layer**
 
 * **Virtual Machines (VMs):**
@@ -41,7 +43,7 @@ This is the architecture i will implement for a production Kubernetes Environmen
 
 * **Container Storage Interface (CSI):**
   * **Storage Provisioning:** Implement a CSI-compatible storage solution to manage persistent storage for applications running in the Kubernetes cluster. The CSI will enable dynamic provisioning of storage volumes and ensure that data persists beyond the lifecycle of individual containers.
-    *This is how the CSI works as a volume Driver and attaches to the node*
+    *This is how the CSI works as a **volume Driver** and attaches to the node*
     ![1723405073950](image/GuideProductionHelmChart/1723405073950.png)
     More CSi Diagrams
   * **Persistent Volumes (PVs):** Configure Persistent Volumes and Persistent Volume Claims (PVCs) to allocate storage for stateful applications. These volumes will be backed by the storage solution integrated with the CSI.
