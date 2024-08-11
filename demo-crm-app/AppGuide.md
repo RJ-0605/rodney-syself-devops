@@ -52,7 +52,7 @@ Demo CRM the Helm Chart follows a proper directory structure:
              version: 0.1.0
          ...
       ```
-- * 2. Next is to create  a Values in values.yaml to store values.
+- * 2. Next  i  created  a Values in values.yaml to store values.
        This makes maintenance of the Chart very easy and reusable, also makes it Scalable by **using Go template syntax**:
 
     * For values file see in [file](values.yaml)
@@ -73,7 +73,7 @@ Demo CRM the Helm Chart follows a proper directory structure:
                     targetMemoryUtilizationPercentage: 80 
          ...
       ```
-- * 3. Create a Deployment Template (deployment.yaml) [file](templates/deployment.yaml).
+- * 3. I created a Deployment Template (deployment.yaml) [file](templates/deployment.yaml).
 
        ```bash
           ...
@@ -89,7 +89,7 @@ Demo CRM the Helm Chart follows a proper directory structure:
        NB:
        i. Requests and limits were included to ensure maximum resources in terms of CPU and Memory were delegated to the Deployments, which is very needful in a production environment
        ii. Readiness and liveness probe were used in collaboration with specific  REST API endpoint in the app design, to ensure that a container is healthy and ready to serve traffic
-- * 4. Create the Service Template (service.yaml) [file](templates/service.yaml)
+- * 4. I also added the Service Template (service.yaml) [file](templates/service.yaml)
 
        ```bash
           ...
@@ -110,19 +110,19 @@ Demo CRM the Helm Chart follows a proper directory structure:
 
           ...
        ```
-- * 5. Add the Ingress Template templates/ingress.yaml see [file](templates/ingress.yaml)
+- * 5. Next thing i added was Ingress Template templates/ingress.yaml see [file](templates/ingress.yaml)
 
-       ```bash
-          ...
-              namespace: default
-              app:
-                  name: my-app
-                  image: "nginx:latest"
-                  replicas: 2
-                  config:
-          ...
-       ```
-- * 6. I createdthe ConfigMap Template templates/configmap.yaml see [file](templates/configmap.yaml)
+    ```bash
+       ...
+           namespace: default
+           app:
+               name: my-app
+               image: "nginx:latest"
+               replicas: 2
+               config:
+       ...
+    ```
+- * 6. I created the ConfigMap Template templates/configmap.yaml see [file](templates/configmap.yaml)
 - * 7. I added the Secret Template [file](templates/secret.yaml)
 - * 8. Also i attached the Horizontal Pod AutoScaler automatically updates a workload resource (such as a Deployment or StatefulSet), with the aim of automatically scaling the workload to match demand. [file](templates/hpa.yaml)
 - * 9. Finally  i attached  the cert-manager template  to enable TLS termination for the ingress [file](templates/cert-manager.yaml)
